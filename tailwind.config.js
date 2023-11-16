@@ -5,9 +5,12 @@ module.exports = {
 
 		// Or if using `src` directory:
 		"./src/**/*.{js,ts,jsx,tsx,mdx}",
+
+		// add preline UI
+		"node_modules/preline/dist/*.js",
 	],
 	theme: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/forms"), require("preline/plugin")],
 };

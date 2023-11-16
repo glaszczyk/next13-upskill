@@ -15,7 +15,7 @@ export default function HomePage() {
 						Get started by editing&nbsp;
 						<code className={styles.code}>pages/index.tsx</code>
 					</p>
-					<h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+					<h1 className="font-sans text-4xl dark:text-white">Hello, Next.js!</h1>
 					<div>
 						<a
 							href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
