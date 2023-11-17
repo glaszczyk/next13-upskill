@@ -18,6 +18,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Upskill API
+
 The documentation of the API for the Xebia Next.js Upskill is available in the folder `docs` of this repository.
 
 To read the documentation go to [editor.swagger.io](https://editor.swagger.io) and paste the content of the `nextjs-api-upskill.yaml` file in the editor.

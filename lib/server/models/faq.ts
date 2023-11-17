@@ -1,9 +1,9 @@
 export interface IFaq {
-    faqId: number;
-    question: string;
-    answer: string;
+	faqId: number;
+	question: string;
+	answer: string;
 }
 
 export interface IFaqService {
-    getFaqList(): IFaq[];
+	getFaqList(): IFaq[];
 }
