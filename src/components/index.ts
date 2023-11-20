@@ -1,3 +1,5 @@
 import { AppHeader } from "./AppHeader";
+import { BlogPostItem } from "./BlogPostItem";
+import { BlogPostListItem } from "./BlogPostListItem";
 
-export { AppHeader };
+export { AppHeader, BlogPostItem, BlogPostListItem };
