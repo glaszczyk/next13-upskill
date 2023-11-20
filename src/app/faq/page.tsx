@@ -1,4 +1,4 @@
-import { FaqItem } from "@src/components";
+import { FaqItem } from "@src/components/FaqItem";
 
 export default function Page() {
 	const faqData = [
