@@ -22,15 +22,15 @@ export default function RootLayout({
 		<html lang="en">
 			<body className="bg-gray-50">
 				<PrelineLoader />
+				<AppHeader />
 				<div className="relative mx-auto flex h-full  max-w-[85rem] flex-col scroll-auto p-0">
-					<AppHeader />
 					<main className="mt-20 min-h-max  pb-28">
 						<div className="container mx-auto h-full pt-6 ">
 							<div className="container mx-auto h-full">{children}</div>
 						</div>
 					</main>
-					<AppFooter />
 				</div>
+				<AppFooter />
 			</body>
 		</html>
 	);

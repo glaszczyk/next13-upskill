@@ -1,7 +1,7 @@
 export const AppFooter = () => {
 	return (
-		<footer className="fixed bottom-0 mx-auto w-full max-w-[85rem] bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
-			<div className="grid grid-cols-1 items-center gap-5 text-center md:grid-cols-3">
+		<footer className="fixed bottom-0 mx-auto w-full bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
+			<div className="grid max-w-[85rem] grid-cols-1 items-center gap-5 text-center md:grid-cols-3">
 				<div>
 					<a
 						className="flex-none text-xl font-semibold text-gray-200 hover:text-gray-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
