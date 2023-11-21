@@ -1,5 +1,5 @@
 export const AppHeader = () => (
-	<header className="sticky top-0 z-50 flex w-full flex-wrap bg-blue-600 py-3 text-sm sm:flex-nowrap sm:justify-start sm:py-0">
+	<header className="fixed top-0 z-50 flex w-full flex-wrap bg-blue-600 py-3 text-sm sm:flex-nowrap sm:justify-start sm:py-0">
 		<nav
 			className="relative mx-auto w-full max-w-[85rem] px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
 			aria-label="Global"

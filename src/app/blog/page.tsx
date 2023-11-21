@@ -19,7 +19,7 @@ export default function BlogPostList() {
 					The Blog
 				</h2>
 				<p className="mt-1 text-gray-600 dark:text-gray-400">
-					See how game-changing companies are making the most of every engagement with Preline.
+					See how game-changing companies are making the most of every engagement with us.
 				</p>
 			</div>
 
