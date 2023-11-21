@@ -1,112 +1,63 @@
 "use client";
 
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import { ProductsListItem } from "@src/components/index";
 
-const inter = Inter({ subsets: ["latin"] });
+const productsListData = {
+	products: [
+		{
+			productId: 1,
+			title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+			price: 109.95,
+			description:
+				"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+			category: "men's clothing",
+			image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+			stock: 3,
+		},
+		{
+			productId: 3,
+			title: "Mens Cotton Jacket",
+			price: 55.99,
+			description:
+				"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+			category: "men's clothing",
+			image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+			stock: 1,
+		},
+		{
+			productId: 4,
+			title: "Mens Casual Slim Fit",
+			price: 15.99,
+			description:
+				"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+			category: "men's clothing",
+			image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+			stock: 3,
+		},
+	],
+};
 
 export default function HomePage() {
 	return (
 		<>
-			<main className={styles.main}>
-				<div className={styles.description}>
-					<p>
-						Get started by editing&nbsp;
-						<code className={styles.code}>pages/index.tsx</code>
-					</p>
-					<h1 className="font-sans text-4xl dark:text-white">Hello, Next.js!</h1>
-					<div>
-						<a
-							href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							By{" "}
-							<Image
-								src="/vercel.svg"
-								alt="Vercel Logo"
-								className={styles.vercelLogo}
-								width={100}
-								height={24}
-								priority
-							/>
-						</a>
-					</div>
-				</div>
-
-				<div className={styles.center}>
-					<Image
-						className={styles.logo}
-						src="/next.svg"
-						alt="Next.js Logo"
-						width={180}
-						height={37}
-						priority
-					/>
-					<div className={styles.thirteen}>
-						<Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-					</div>
-				</div>
-
-				<div className={styles.grid}>
+			<div>
+				<h1 className="pb-6 font-sans text-3xl font-bold text-gray-800 dark:text-white">
+					Our fresh products!
+				</h1>
+				<ul className="grid grid-cols-3 gap-4">
+					{productsListData.products.map((product) => (
+						<ProductsListItem key={product.productId} product={product} />
+					))}
+				</ul>
+				<div className="my-9 flex w-full justify-center">
 					<a
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-						target="_blank"
-						rel="noopener noreferrer"
+						href="/products"
+						className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-teal-500 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-600 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 					>
-						<h2 className={inter.className}>
-							Docs <span>-&gt;</span>
-						</h2>
-						<p className={inter.className}>
-							Find in-depth information about Next.js features and&nbsp;API.
-						</p>
-					</a>
-
-					<a
-						href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<h2 className={inter.className}>
-							Learn <span>-&gt;</span>
-						</h2>
-						<p className={inter.className}>
-							Learn about Next.js in an interactive course with&nbsp;quizzes!
-						</p>
-					</a>
-
-					<a
-						href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<h2 className={inter.className}>
-							Templates <span>-&gt;</span>
-						</h2>
-						<p className={inter.className}>
-							Discover and deploy boilerplate example Next.js&nbsp;projects.
-						</p>
-					</a>
-
-					<a
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<h2 className={inter.className}>
-							Deploy <span>-&gt;</span>
-						</h2>
-						<p className={inter.className}>
-							Instantly deploy your Next.js site to a shareable URL with&nbsp;Vercel.
-						</p>
+						Check more
 					</a>
 				</div>
-			</main>
+			</div>
 		</>
 	);
 }
