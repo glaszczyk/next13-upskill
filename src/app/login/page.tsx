@@ -23,7 +23,7 @@ export default function Page() {
 											required
 											aria-describedby="email-error"
 										/>
-										<div className="pointer-events-none absolute inset-y-0 end-0 flex hidden items-center pe-3">
+										<div className="pointer-events-none absolute inset-y-0 end-0 hidden items-center pe-3">
 											<svg
 												className="h-5 w-5 text-red-500"
 												width="16"
@@ -47,7 +47,7 @@ export default function Page() {
 										</label>
 										<a
 											className="text-sm font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-											href="../examples/html/recover-account.html"
+											href="#"
 										>
 											Forgot password?
 										</a>
@@ -61,7 +61,7 @@ export default function Page() {
 											required
 											aria-describedby="password-error"
 										/>
-										<div className="pointer-events-none absolute inset-y-0 end-0 flex hidden items-center pe-3">
+										<div className="pointer-events-none absolute inset-y-0 end-0 hidden items-center pe-3">
 											<svg
 												className="h-5 w-5 text-red-500"
 												width="16"
