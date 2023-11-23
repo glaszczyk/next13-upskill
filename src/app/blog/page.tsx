@@ -1,17 +1,9 @@
-import { BlogPostListItem, type BlogPostItem } from "@src/components/BlogPostListItem";
-
-const blogpostListData: BlogPostItem[] = [
-	{
-		postId: 34,
-		title: "Mauris pellentesque lobortis nisl eu tempus.",
-		slug: "mauris-pellentesque-lobortis-nisl-eu-tempus",
-		author: {
-			name: "Mauris Pellentesque",
-		},
-	},
-];
+import { type IBlogPost } from "@/lib/server/models/blog";
+import blog from "@/lib/server/services/blog";
+import { BlogPostListItem } from "@src/components/BlogPostListItem";
 
 export default function BlogPostList() {
+	const blogpostListData: Omit<IBlogPost, "content" | "createdAt">[] = blog.getBlogList();
 	return (
 		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
