@@ -1,13 +1,8 @@
+import faq from "@/lib/server/services/faq";
 import { FaqItem } from "@src/components/FaqItem";
 
 export default function Page() {
-	const faqData = [
-		{
-			faqId: 5,
-			question: "How to place the order?",
-			answer: "Click on the Pay button on the checkout page",
-		},
-	];
+	const faqData = faq.getFaqList();
 	return (
 		<>
 			<div className="mx-auto mb-10 max-w-2xl lg:mb-14">
