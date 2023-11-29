@@ -1,15 +1,7 @@
-export type ProductDetails = {
-	productId: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	stock: number;
-};
+import { type IProduct } from "@/lib/server/models/products";
 
 type ProductItemProps = {
-	product: ProductDetails;
+	product: IProduct;
 };
 export const ProductItem = ({
 	product: { category, description, image, price, productId, stock, title },
