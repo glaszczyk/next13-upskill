@@ -1,4 +1,4 @@
-import products from "@/lib/server/services/products";
+import products from "@services/products";
 import { ProductItem } from "@src/components/ProductItem";
 
 type ProductDetailsPageProps = {

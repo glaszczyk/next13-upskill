@@ -1,8 +1,11 @@
-import faq from "@/lib/server/services/faq";
+import { cache } from "react";
+import faq from "@services/faq";
 import { FaqItem } from "@src/components/FaqItem";
 
+export const revalidate = 84400;
+
 export default function Page() {
-	const faqData = faq.getFaqList();
+	const faqData = cache(() => faq.getFaqList())();
 	return (
 		<>
 			<div className="mx-auto mb-10 max-w-2xl lg:mb-14">

@@ -1,4 +1,4 @@
-import products from "@/lib/server/services/products";
+import products from "@services/products";
 import { Pagination } from "@src/components/index";
 import { ProductsListItem } from "@src/components/ProductsListItem";
 

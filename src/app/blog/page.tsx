@@ -1,9 +1,14 @@
-import { type IBlogPost } from "@/lib/server/models/blog";
-import blog from "@/lib/server/services/blog";
+import { cache } from "react";
+import { type IBlogPost } from "@models/blog";
+import blog from "@services/blog";
 import { BlogPostListItem } from "@src/components/BlogPostListItem";
 
+export const revalidate = 84400;
+
 export default function BlogPostList() {
-	const blogpostListData: Omit<IBlogPost, "content" | "createdAt">[] = blog.getBlogList();
+	const blogpostListData: Omit<IBlogPost, "content" | "createdAt">[] = cache(() =>
+		blog.getBlogList(),
+	)();
 	return (
 		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
