@@ -22,7 +22,7 @@ export const ProductsListItem = ({
 					{category}
 				</span>
 			</div>
-			<a href={`/products/${productId}`}>
+			<a href={`/product/${productId}`}>
 				<img
 					className="aspect-square h-auto  w-full rounded-t-xl object-contain"
 					src={image}
