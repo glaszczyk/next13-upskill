@@ -1,5 +1,27 @@
-import { redirect } from "next/navigation";
+import products from "@services/products";
+import { Pagination } from "@src/components/index";
+import { ProductsListItem } from "@src/components/ProductsListItem";
 
-export default function ProductsListFallbackPage() {
-	redirect("/products/1");
+export const revalidate = 0;
+
+type ProductsListPageProps = {
+	searchParams: {
+		page?: string;
+	};
+};
+export default function ProductsListPage({ searchParams: { page = "1" } }: ProductsListPageProps) {
+	const pageNo = parseInt(page);
+	const { products: productList, meta } = products.getProducts(pageNo);
+	return (
+		<>
+			<ul className="grid grid-cols-3 gap-4">
+				{productList.map((product) => (
+					<ProductsListItem key={product.productId} product={product} />
+				))}
+			</ul>
+			<div className="container mx-auto flex justify-center py-4">
+				<Pagination route={"/products"} meta={meta} />
+			</div>
+		</>
+	);
 }
