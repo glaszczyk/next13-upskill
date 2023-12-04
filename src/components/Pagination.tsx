@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type IProductResponse } from "@/lib/server/models/products";
 
 type Route = `/${string}`;
@@ -17,7 +18,8 @@ export const Pagination = ({ route, meta }: PaginationProps) => {
 	return (
 		<nav className="flex items-center gap-x-1">
 			{navigation.prev && (
-				<a
+				<Link
+					shallow
 					className="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-2 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
 					href={pageUrl(navigation.prev)}
 				>
@@ -38,7 +40,7 @@ export const Pagination = ({ route, meta }: PaginationProps) => {
 					<span aria-hidden="true" className="sr-only">
 						Previous
 					</span>
-				</a>
+				</Link>
 			)}
 			<div className="flex items-center gap-x-1">
 				<span className="flex min-h-[38px] min-w-[38px] items-center justify-center rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:text-white dark:focus:bg-white/10">

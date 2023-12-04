@@ -1,11 +1,15 @@
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import faq from "@services/faq";
 import { FaqItem } from "@src/components/FaqItem";
 
-export const revalidate = 84400;
+const revalidate = 84400;
 
-export default function Page() {
-	const faqData = cache(() => faq.getFaqList())();
+const getFaqData = unstable_cache(async () => faq.getFaqList(), ["cached-faq"], {
+	revalidate,
+});
+
+export default async function Page() {
+	const faqData = await getFaqData();
 	return (
 		<>
 			<div className="mx-auto mb-10 max-w-2xl lg:mb-14">

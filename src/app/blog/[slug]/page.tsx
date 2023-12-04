@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { type IBlogPost } from "@models/blog";
 import blog from "@services/blog";
 import { BlogPostItem } from "@src/components/BlogPostItem";
@@ -8,17 +8,27 @@ type BlogPostPageProps = {
 	params: Slug;
 };
 
-export const revalidate = 84400;
+const revalidate = 84400;
 
-export function generateStaticParams(): Slug[] {
-	const staticBlogposts = cache(() => blog.getBlogList());
+const getBlogpostData = unstable_cache(
+	async (slug: string) => blog.getSingeBlog(slug),
+	["cached-blog-post"],
+	{
+		revalidate,
+	},
+);
 
-	return staticBlogposts()
-		.filter((_, i) => i < 3)
-		.map(({ slug }) => ({ slug }));
+const getBlogpostListData = unstable_cache(async () => blog.getBlogList(), ["cached-blog-list"], {
+	revalidate,
+});
+
+export async function generateStaticParams(): Promise<Slug[]> {
+	const staticBlogposts: Omit<IBlogPost, "content" | "createdAt">[] = await getBlogpostListData();
+
+	return staticBlogposts.filter((_, i) => i < 3).map(({ slug }) => ({ slug }));
 }
 
-export default function Page({ params: { slug } }: BlogPostPageProps) {
-	const blogPostData = blog.getSingeBlog(slug);
+export default async function Page({ params: { slug } }: BlogPostPageProps) {
+	const blogPostData = await getBlogpostData(slug);
 	return <BlogPostItem post={blogPostData} />;
 }
