@@ -1,13 +1,15 @@
+import { unstable_cache } from "next/cache";
+import faq from "@services/faq";
 import { FaqItem } from "@src/components/FaqItem";
 
-export default function Page() {
-	const faqData = [
-		{
-			faqId: 5,
-			question: "How to place the order?",
-			answer: "Click on the Pay button on the checkout page",
-		},
-	];
+const revalidate = 84400;
+
+const getFaqData = unstable_cache(async () => faq.getFaqList(), ["cached-faq"], {
+	revalidate,
+});
+
+export default async function Page() {
+	const faqData = await getFaqData();
 	return (
 		<>
 			<div className="mx-auto mb-10 max-w-2xl lg:mb-14">

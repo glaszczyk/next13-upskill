@@ -1,9 +1,7 @@
+import { type IFaq } from "@/lib/server/models/faq";
+
 type FaqItemProps = {
-	item: {
-		faqId: number;
-		question: string;
-		answer: string;
-	};
+	item: IFaq;
 };
 
 export const FaqItem = ({ item: { question, answer } }: FaqItemProps) => {

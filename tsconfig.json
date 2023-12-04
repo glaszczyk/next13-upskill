@@ -17,7 +17,9 @@
 		"incremental": true,
 		"paths": {
 			"@/*": ["./*"],
-			"@src/*": ["./src/*"]
+			"@src/*": ["./src/*"],
+			"@services/*": ["./lib/server/services/*"],
+			"@models/*": ["./lib/server/models/*"],
 		},
 		"plugins": [
 			{

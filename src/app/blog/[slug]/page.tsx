@@ -1,34 +1,34 @@
-"use client";
-
+import { unstable_cache } from "next/cache";
+import { type IBlogPost } from "@models/blog";
+import blog from "@services/blog";
 import { BlogPostItem } from "@src/components/BlogPostItem";
 
-export type BlogPost = {
-	postId: number;
-	title: string;
-	slug: string;
-	content: string;
-	createdAt: string;
-	author: {
-		name: string;
-	};
-};
-
+type Slug = Pick<IBlogPost, "slug">;
 type BlogPostPageProps = {
-	params: BlogPost;
+	params: Slug;
 };
 
-const blogPostData = {
-	postId: 34,
-	title: "Mauris pellentesque lobortis nisl eu tempus.",
-	slug: "mauris-pellentesque-lobortis-nisl-eu-tempus",
-	content:
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu enim auctor, euismod neque sed, hendrerit eros. Nulla semper consequat molestie. Quisque non ligula accumsan, vestibulum ipsum ac, ultricies ex. Quisque vel pellentesque ex, vel posuere nisi. Aliquam velit sem, pharetra sit amet risus nec, hendrerit dictum arcu. Nulla facilisi. Pellentesque egestas ultricies ligula eget gravida. Aenean laoreet est id nisi commodo, sed scelerisque risus aliquam. Sed vitae interdum ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis auctor vestibulum velit nec interdum. Duis et placerat libero. Sed at velit fringilla, tempor quam at, feugiat lorem.",
-	createdAt: "2023-02-10",
-	author: {
-		name: "Mauris Pellentesque",
+const revalidate = 84400;
+
+const getBlogpostData = unstable_cache(
+	async (slug: string) => blog.getSingeBlog(slug),
+	["cached-blog-post"],
+	{
+		revalidate,
 	},
-};
-export default function Page({ params }: BlogPostPageProps) {
-	const { slug: _, ...restOfBlogPostData } = blogPostData;
-	return <BlogPostItem post={{ ...params, ...restOfBlogPostData }} />;
+);
+
+const getBlogpostListData = unstable_cache(async () => blog.getBlogList(), ["cached-blog-list"], {
+	revalidate,
+});
+
+export async function generateStaticParams(): Promise<Slug[]> {
+	const staticBlogposts: Omit<IBlogPost, "content" | "createdAt">[] = await getBlogpostListData();
+
+	return staticBlogposts.filter((_, i) => i < 3).map(({ slug }) => ({ slug }));
+}
+
+export default async function Page({ params: { slug } }: BlogPostPageProps) {
+	const blogPostData = await getBlogpostData(slug);
+	return <BlogPostItem post={blogPostData} />;
 }
