@@ -33,7 +33,7 @@ export default function Page() {
 									</svg>
 								</button>
 								<span
-									className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible invisible absolute z-10 inline-block w-40 rounded bg-gray-900 px-2 py-1 text-center text-xs font-medium text-white opacity-0 shadow-sm transition-opacity dark:bg-slate-700"
+									className="hs-tooltip-content invisible absolute z-10 inline-block w-40 rounded bg-gray-900 px-2 py-1 text-center text-xs font-medium text-white opacity-0 shadow-sm transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100 dark:bg-slate-700"
 									role="tooltip"
 								>
 									Displayed on public forums, such as Preline
@@ -120,11 +120,14 @@ export default function Page() {
 									className="relative -ms-px -mt-px block w-full border-gray-200 px-3 py-2 pe-11 text-sm shadow-sm first:rounded-t-lg last:rounded-b-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600 sm:mt-0 sm:first:ms-0 sm:first:rounded-s-lg sm:first:rounded-se-none sm:last:rounded-e-lg sm:last:rounded-es-none"
 									placeholder="+x(xxx)xxx-xx-xx"
 								/>
-								<select className="relative -ms-px -mt-px block w-full border-gray-200 px-3 py-2 pe-9 text-sm shadow-sm first:rounded-t-lg last:rounded-b-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600 sm:mt-0 sm:w-auto sm:first:ms-0 sm:first:rounded-s-lg sm:first:rounded-se-none sm:last:rounded-e-lg sm:last:rounded-es-none">
-									<option selected>Mobile</option>
-									<option>Home</option>
-									<option>Work</option>
-									<option>Fax</option>
+								<select
+									defaultValue="mobile"
+									className="relative -ms-px -mt-px block w-full border-gray-200 px-3 py-2 pe-9 text-sm shadow-sm first:rounded-t-lg last:rounded-b-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600 sm:mt-0 sm:w-auto sm:first:ms-0 sm:first:rounded-s-lg sm:first:rounded-se-none sm:last:rounded-e-lg sm:last:rounded-es-none"
+								>
+									<option value="mobile">Mobile</option>
+									<option value="home">Home</option>
+									<option value="work">Work</option>
+									<option value="fax">Fax</option>
 								</select>
 							</div>
 						</div>
@@ -149,7 +152,6 @@ export default function Page() {
 										name="af-account-gender-checkbox"
 										className="mt-0.5 shrink-0 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
 										id="af-account-gender-checkbox"
-										checked
 									/>
 									<span className="ms-3 text-sm text-gray-500 dark:text-gray-400">Male</span>
 								</label>

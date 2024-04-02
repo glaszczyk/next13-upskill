@@ -1,14 +1,7 @@
-export type BlogPostItem = {
-	postId: number;
-	title: string;
-	slug: string;
-	author: {
-		name: string;
-	};
-};
+import { type IBlogPost } from "@/lib/server/models/blog";
 
 type BlogPostListItemProps = {
-	post: BlogPostItem;
+	post: Omit<IBlogPost, "content" | "createdAt">;
 };
 
 export const BlogPostListItem = ({ post: { author, slug, title } }: BlogPostListItemProps) => {

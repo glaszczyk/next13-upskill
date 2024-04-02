@@ -1,7 +1,7 @@
-import { type BlogPost } from "@src/app/blog/[slug]/page";
+import { type IBlogPost } from "@/lib/server/models/blog";
 
 type BlogPostProps = {
-	post: BlogPost;
+	post: IBlogPost;
 };
 export const BlogPostItem = ({ post }: BlogPostProps) => {
 	return (

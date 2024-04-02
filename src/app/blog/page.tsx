@@ -1,17 +1,16 @@
-import { BlogPostListItem, type BlogPostItem } from "@src/components/BlogPostListItem";
+import { unstable_cache } from "next/cache";
+import { type IBlogPost } from "@models/blog";
+import blog from "@services/blog";
+import { BlogPostListItem } from "@src/components/BlogPostListItem";
 
-const blogpostListData: BlogPostItem[] = [
-	{
-		postId: 34,
-		title: "Mauris pellentesque lobortis nisl eu tempus.",
-		slug: "mauris-pellentesque-lobortis-nisl-eu-tempus",
-		author: {
-			name: "Mauris Pellentesque",
-		},
-	},
-];
+const revalidate = 84400;
 
-export default function BlogPostList() {
+const getBlogpostListData = unstable_cache(async () => blog.getBlogList(), ["cached-blog-list"], {
+	revalidate,
+});
+
+export default async function BlogPostList() {
+	const blogpostListData: Omit<IBlogPost, "content" | "createdAt">[] = await getBlogpostListData();
 	return (
 		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
