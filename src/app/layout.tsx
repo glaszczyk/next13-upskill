@@ -1,7 +1,6 @@
 import { type ReactNode } from "react";
 
 import { type Metadata } from "next";
-import PrelineLoader from "./prelineLoader";
 import { AppFooter } from "@src/components/AppFooter";
 import { AppHeader } from "@src/components/index";
 import "@/styles/globals.css";
@@ -21,7 +20,6 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className="bg-gray-50">
-				<PrelineLoader />
 				<AppHeader />
 				<div className="relative mx-auto flex h-full  max-w-[85rem] flex-col scroll-auto p-0">
 					<main className="mt-20 min-h-max  pb-28">
