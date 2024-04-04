@@ -62,7 +62,7 @@ export const AppHeader = () => (
 						Cart
 					</a>
 					<a className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/user">
-						Account
+						User
 					</a>
 					<a className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/faq">
 						FAQ
