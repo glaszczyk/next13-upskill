@@ -1,6 +1,7 @@
-"use client";
-
-import { ProductsListItem } from "@src/components/index";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "./_app";
+import { ProductsListItem } from "@/components";
+import Layout from "@/components/Layout";
 
 const productsListData = {
 	products: [
@@ -37,27 +38,29 @@ const productsListData = {
 	],
 };
 
-export default function HomePage() {
-	return (
-		<>
-			<div>
-				<h1 className="pb-6 font-sans text-3xl font-bold text-gray-800 dark:text-white">
-					Our fresh products!
-				</h1>
-				<ul className="grid grid-cols-3 gap-4">
-					{productsListData.products.map((product) => (
-						<ProductsListItem key={product.productId} product={product} />
-					))}
-				</ul>
-				<div className="my-9 flex w-full justify-center">
-					<a
-						href="/products"
-						className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-teal-500 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-600 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-					>
-						Check more
-					</a>
-				</div>
-			</div>
-		</>
-	);
-}
+const Page: NextPageWithLayout = () => (
+	<div>
+		<h1 className="pb-6 font-sans text-3xl font-bold text-gray-800 dark:text-white">
+			Our fresh products!
+		</h1>
+		<ul className="grid grid-cols-3 gap-4">
+			{productsListData.products.map((product) => (
+				<ProductsListItem key={product.productId} product={product} />
+			))}
+		</ul>
+		<div className="my-9 flex w-full justify-center">
+			<a
+				href="/products"
+				className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-teal-500 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-600 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+			>
+				Check more
+			</a>
+		</div>
+	</div>
+);
+
+Page.getLayout = function getLayout(page: ReactElement) {
+	return <Layout>{page}</Layout>;
+};
+
+export default Page;

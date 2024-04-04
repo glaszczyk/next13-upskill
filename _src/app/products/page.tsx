@@ -1,6 +1,6 @@
 import products from "@services/products";
-import { Pagination } from "@src/components/index";
-import { ProductsListItem } from "@src/components/ProductsListItem";
+import { Pagination } from "@/components/index";
+import { ProductsListItem } from "@/components/ProductsListItem";
 
 export const revalidate = 0;
 

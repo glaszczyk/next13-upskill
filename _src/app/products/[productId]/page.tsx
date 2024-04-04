@@ -1,5 +1,5 @@
 import products from "@services/products";
-import { ProductItem } from "@src/components/ProductItem";
+import { ProductItem } from "@/components/ProductItem";
 
 type ProductDetailsPageProps = {
 	params: {

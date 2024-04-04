@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type IProductResponse } from "@/lib/server/models/products";
+import { type IProductResponse } from "@models/products";
 
 type Route = `/${string}`;
 type PaginationProps = Pick<IProductResponse, "meta"> & { route: Route };

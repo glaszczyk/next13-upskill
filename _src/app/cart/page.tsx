@@ -1,4 +1,4 @@
-import { type CartItem, CartTableItemRow } from "@src/components/CartTableItemRow";
+import { type CartItem, CartTableItemRow } from "@/components/CartTableItemRow";
 
 const cartItems: CartItem[] = [
 	{

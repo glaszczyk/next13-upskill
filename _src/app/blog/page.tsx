@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { type IBlogPost } from "@models/blog";
 import blog from "@services/blog";
-import { BlogPostListItem } from "@src/components/BlogPostListItem";
+import { BlogPostListItem } from "@/components/BlogPostListItem";
 
 const revalidate = 84400;
 

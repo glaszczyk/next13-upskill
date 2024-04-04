@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { type IBlogPost } from "@models/blog";
 import blog from "@services/blog";
-import { BlogPostItem } from "@src/components/BlogPostItem";
+import { BlogPostItem } from "@/components/BlogPostItem";
 
 type Slug = Pick<IBlogPost, "slug">;
 type BlogPostPageProps = {

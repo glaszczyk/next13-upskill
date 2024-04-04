@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import faq from "@services/faq";
-import { FaqItem } from "@src/components/FaqItem";
+import { FaqItem } from "@/components/FaqItem";
 
 const revalidate = 84400;
 

@@ -1,4 +1,4 @@
-import { type IProduct } from "@/lib/server/models/products";
+import { type IProduct } from "@models/products";
 
 type ProductItemProps = {
 	product: IProduct;

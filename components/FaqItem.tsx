@@ -1,4 +1,4 @@
-import { type IFaq } from "@/lib/server/models/faq";
+import { type IFaq } from "@models/faq";
 
 type FaqItemProps = {
 	item: IFaq;

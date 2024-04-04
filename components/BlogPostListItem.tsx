@@ -1,4 +1,4 @@
-import { type IBlogPost } from "@/lib/server/models/blog";
+import { type IBlogPost } from "@models/blog";
 
 type BlogPostListItemProps = {
 	post: Omit<IBlogPost, "content" | "createdAt">;

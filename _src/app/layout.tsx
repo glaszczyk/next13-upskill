@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 
 import { type Metadata } from "next";
-import { AppFooter } from "@src/components/AppFooter";
-import { AppHeader } from "@src/components/index";
+import { AppFooter } from "@/components/AppFooter";
+import { AppHeader } from "@/components/index";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {

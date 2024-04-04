@@ -5,7 +5,7 @@ export const AppHeader = () => (
 			aria-label="Global"
 		>
 			<div className="flex items-center justify-between">
-				<a className="flex-none text-xl font-semibold text-white" href="/" aria-label="Brand">
+				<a className="flex-none text-xl font-semibold text-white" href="/public" aria-label="Brand">
 					Brand
 				</a>
 				<div className="sm:hidden">
