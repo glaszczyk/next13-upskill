@@ -13,7 +13,7 @@ export const ProductItem = ({
 					className="start-0 top-0 aspect-square object-contain p-6"
 					src={image}
 					alt={description}
-				/>
+				></img>
 			</div>
 			<div className="flex flex-wrap">
 				<div className="flex h-full flex-col p-4 sm:p-7">
