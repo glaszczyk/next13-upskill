@@ -5,7 +5,7 @@ import { FaqItem } from "./FaqItem";
 import { ProductItem } from "./ProductItem";
 import { ProductsListItem } from "./ProductsListItem";
 import { Pagination } from "./Pagination";
-import Layout from "./Layout";
+import { Layout } from "./Layout";
 
 export {
 	AppHeader,

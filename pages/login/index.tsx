@@ -1,6 +1,6 @@
 import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from "next";
 import { type FormEvent, type ReactElement, useRef, useState } from "react";
-import Layout from "../../components/Layout";
+import { Layout } from "../../components/Layout";
 
 const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const loginFormRef = useRef<HTMLFormElement>(null);

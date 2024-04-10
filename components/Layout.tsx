@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { AppFooter } from "./AppFooter";
 import { AppHeader } from "./AppHeader";
 
-export default function Layout({
+export function Layout({
 	// Layouts must accept a children prop.
 	// This will be populated with nested layouts or pages
 	children,

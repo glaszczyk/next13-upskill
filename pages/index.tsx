@@ -1,7 +1,8 @@
+import Link from "next/link";
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
 import { ProductsListItem } from "@/components";
-import Layout from "@/components/Layout";
+import { Layout } from "@/components/Layout";
 
 const productsListData = {
 	products: [
@@ -49,12 +50,12 @@ const Page: NextPageWithLayout = () => (
 			))}
 		</ul>
 		<div className="my-9 flex w-full justify-center">
-			<a
+			<Link
 				href="/products"
 				className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-teal-500 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-600 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 			>
 				Check more
-			</a>
+			</Link>
 		</div>
 	</div>
 );

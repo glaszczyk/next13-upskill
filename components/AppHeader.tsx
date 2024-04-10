@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const AppHeader = () => (
 	<header className="fixed top-0 z-50 flex w-full flex-wrap bg-blue-600 py-3 text-sm sm:flex-nowrap sm:justify-start sm:py-0">
 		<nav
@@ -5,9 +7,9 @@ export const AppHeader = () => (
 			aria-label="Global"
 		>
 			<div className="flex items-center justify-between">
-				<a className="flex-none text-xl font-semibold text-white" href="/" aria-label="Brand">
+				<Link className="flex-none text-xl font-semibold text-white" href="/" aria-label="Brand">
 					Brand
-				</a>
+				</Link>
 				<div className="sm:hidden">
 					<button
 						type="button"
@@ -55,22 +57,22 @@ export const AppHeader = () => (
 				className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block"
 			>
 				<div className="mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:ps-7">
-					<a className="font-medium text-white sm:py-6" href="/products" aria-current="page">
+					<Link className="font-medium text-white sm:py-6" href="/products" aria-current="page">
 						Products
-					</a>
-					<a className="font-medium text-white sm:py-6" href="/cart" aria-current="page">
+					</Link>
+					<Link className="font-medium text-white sm:py-6" href="/cart" aria-current="page">
 						Cart
-					</a>
-					<a className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/user">
+					</Link>
+					<Link className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/user">
 						User
-					</a>
-					<a className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/faq">
+					</Link>
+					<Link className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/faq">
 						FAQ
-					</a>
-					<a className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/blog">
+					</Link>
+					<Link className="font-medium text-white/[.8] hover:text-white sm:py-6" href="/blog">
 						Blog
-					</a>
-					<a
+					</Link>
+					<Link
 						className="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:my-6 sm:border-s sm:border-white/[.3] sm:ps-6"
 						href="/login"
 					>
@@ -90,7 +92,7 @@ export const AppHeader = () => (
 							<circle cx="12" cy="7" r="4" />
 						</svg>
 						Log in
-					</a>
+					</Link>
 				</div>
 			</div>
 		</nav>

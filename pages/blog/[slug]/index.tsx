@@ -1,6 +1,6 @@
 import { type GetStaticProps, type InferGetStaticPropsType } from "next";
 import type { ReactElement } from "react";
-import Layout from "../../../components/Layout";
+import { Layout } from "../../../components/Layout";
 import { type IBlogPost } from "@models/blog";
 import { BlogPostItem } from "@/components/BlogPostItem";
 

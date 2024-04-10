@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import Layout from "../../components/Layout";
+import { Layout } from "../../components/Layout";
 import { type IBlogPost } from "@models/blog";
 import { BlogPostListItem } from "@/components/BlogPostListItem";
 

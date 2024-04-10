@@ -6,7 +6,7 @@ import {
 import { useRouter } from "next/router";
 import type { ReactElement } from "react";
 import useSWR, { type Fetcher } from "swr";
-import Layout from "../../components/Layout";
+import { Layout } from "../../components/Layout";
 import { type IProductResponse } from "@models/products";
 import { Pagination } from "@/components/index";
 import { ProductsListItem } from "@/components/ProductsListItem";
