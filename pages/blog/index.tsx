@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Layout } from "../../components/Layout";
+import { Layout } from "@/components/index";
 import { type IBlogPost } from "@models/blog";
 import { BlogPostListItem } from "@/components/BlogPostListItem";
 
@@ -51,8 +51,12 @@ const BlogPostList = ({
 };
 
 export async function getStaticProps() {
+	const endpointUrl =
+		process.env.NODE_ENV === "development"
+			? `http://${process.env["VERCEL_URL"]}/api/blog`
+			: `https://${process.env["VERCEL_URL"]}/api/blog`;
 	// Call an external API endpoint to get faq
-	const res = await fetch(`${process.env["VERCEL_URL"]}/api/blog`);
+	const res = await fetch(endpointUrl);
 	const blogpostListData = await res.json();
 
 	// By returning { props: { blogpostListData } }, the BlogPostList component

@@ -6,9 +6,8 @@ import {
 import { useRouter } from "next/router";
 import type { ReactElement } from "react";
 import useSWR, { type Fetcher } from "swr";
-import { Layout } from "../../components/Layout";
+import { Layout, Pagination } from "@/components/index";
 import { type IProductResponse } from "@models/products";
-import { Pagination } from "@/components/index";
 import { ProductsListItem } from "@/components/ProductsListItem";
 
 const fetcher: Fetcher<IProductResponse> = (url: string) => fetch(url).then((r) => r.json());

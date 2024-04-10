@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Layout } from "../../components/Layout";
+import { Layout } from "@/components/index";
 import { type CartItem, CartTableItemRow } from "@/components/CartTableItemRow";
 
 const cartItems: CartItem[] = [
