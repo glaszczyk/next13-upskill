@@ -1,18 +1,23 @@
 import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from "next";
-import { type FormEvent, type ReactElement, useRef, useState } from "react";
+import { type FormEvent, type ReactElement, useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/index";
 
 const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const loginFormRef = useRef<HTMLFormElement>(null);
 	const [loginError, setLoginError] = useState<string>("");
+	const [origin, setOrigin] = useState("");
+	useEffect(() => {
+		setOrigin(window.location.origin);
+	}, []);
 
+	console.log(origin);
 	const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const login = formData.get("login");
 		const password = formData.get("password");
 		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, {
+			const response = await fetch(`${origin}/api/user/login`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -31,7 +36,7 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 	};
 
 	const handleLogout = async () => {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/logout`);
+		const response = await fetch(`${origin}/api/user/logout`);
 		const responseJson = await response.json();
 		console.log("Logout user", responseJson);
 	};
