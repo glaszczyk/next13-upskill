@@ -39,7 +39,7 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 	const productId = context.query.productId;
 	if (productId && typeof productId === "string") {
 		try {
-			const response = await fetch(`${process.env["VERCEL_URL"]}/api/products/${productId}`);
+			const response = await fetch(`${process.env.API_URL}/api/products/${productId}`);
 			const result: Partial<IProduct & { message?: string }> = await response.json();
 			return {
 				props: {

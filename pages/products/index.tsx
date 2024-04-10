@@ -46,7 +46,7 @@ const ProductsListPage = ({
 export const getServerSideProps = (async (context: GetServerSidePropsContext) => {
 	const activePage =
 		context.query.page && typeof context.query.page === "string" ? context.query.page : "1";
-	const response = await fetch(`${process.env["VERCEL_URL"]}/api/products?page=${activePage}`);
+	const response = await fetch(`${process.env.API_URL}/api/products?page=${activePage}`);
 	const { meta, products } = await response.json();
 	return {
 		props: { products, meta },

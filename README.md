@@ -38,5 +38,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Env variables
 
-VERCEL_URL - basic url for the app
-NEXT_PUBLIC_VERCEL_URL - basic url for the app accessible within components
+API_URL - basic url for the app
+NEXT_PUBLIC_API_URL - basic url for the app accessible within components

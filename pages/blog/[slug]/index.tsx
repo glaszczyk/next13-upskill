@@ -11,7 +11,7 @@ const BlogPost = ({ blogpostData }: InferGetStaticPropsType<typeof getStaticProp
 export const getStaticProps = (async ({ params }) => {
 	const slug = params && typeof params.slug === "string" ? params.slug : "";
 	// Call an external API endpoint to get faq
-	const endpointUrl = `${process.env.VERCEL_URL}/api/blog/${slug}`;
+	const endpointUrl = `${process.env.API_URL}/api/blog/${slug}`;
 	const res = await fetch(endpointUrl);
 	const blogpostData = await res.json();
 
@@ -27,7 +27,7 @@ export const getStaticProps = (async ({ params }) => {
 }>;
 
 export const getStaticPaths = async () => {
-	const endpointUrl = `${process.env["VERCEL_URL"]}/api/blog`;
+	const endpointUrl = `${process.env.API_URL}/api/blog`;
 
 	// Call an external API endpoint to get faq
 	const res = await fetch(endpointUrl);
