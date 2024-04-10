@@ -62,7 +62,7 @@ const UserPage = () => {
 
 						<div className="sm:col-span-3">
 							<label
-								form="af-account-email"
+								form="af-account-login"
 								className="mt-2.5 inline-block text-sm text-gray-800 dark:text-gray-200"
 							>
 								Email
@@ -71,8 +71,8 @@ const UserPage = () => {
 
 						<div className="sm:col-span-9">
 							<input
-								id="af-account-email"
-								type="email"
+								id="af-account-login"
+								type="login"
 								className="block w-full rounded-lg border-gray-200 px-3 py-2 pe-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
 								placeholder="maria@site.com"
 							/>

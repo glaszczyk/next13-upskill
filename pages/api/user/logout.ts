@@ -1,15 +1,25 @@
+import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
 import user from "@/lib/server/services/user";
+import loggedUsers from "@/lib/server/services/loggedUsers";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== "GET") return res.status(405).json({ message: "Method Not Allowed" });
-
-	const userId = req.query.userId;
+	const token = req.cookies["access-token"];
+	const userId = token && loggedUsers.getLoggedUser(token);
+	// const userId = req.query.userId;
 
 	if (!userId) return res.status(400).json({ message: "Bad Request" });
 
 	try {
 		user.logUserOut(+userId);
+		res.setHeader(
+			"Set-Cookie",
+			serialize("access-token", "", {
+				httpOnly: true,
+				expires: new Date("Thu, 01 Jan 1970 00:00:00 GMT"),
+			}),
+		);
 		res.status(200).json({ message: "User logged out" });
 	} catch (error: any) {
 		if (error.message === "User is not logged in") {

@@ -11,17 +11,17 @@ export default function Page() {
 						<form>
 							<div className="grid gap-y-4">
 								<div>
-									<label form="email" className="mb-2 block text-sm dark:text-white">
+									<label form="login" className="mb-2 block text-sm dark:text-white">
 										Email address
 									</label>
 									<div className="relative">
 										<input
-											type="email"
-											id="email"
-											name="email"
+											type="login"
+											id="login"
+											name="login"
 											className="block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
 											required
-											aria-describedby="email-error"
+											aria-describedby="login-error"
 										/>
 										<div className="pointer-events-none absolute inset-y-0 end-0 hidden items-center pe-3">
 											<svg
@@ -36,8 +36,8 @@ export default function Page() {
 											</svg>
 										</div>
 									</div>
-									<p className="mt-2 hidden text-xs text-red-600" id="email-error">
-										Please include a valid email address so we can get back to you
+									<p className="mt-2 hidden text-xs text-red-600" id="login-error">
+										Please include a valid login address so we can get back to you
 									</p>
 								</div>
 								<div>

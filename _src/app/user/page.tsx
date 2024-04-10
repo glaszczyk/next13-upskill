@@ -33,7 +33,7 @@ export default function Page() {
 									</svg>
 								</button>
 								<span
-									className="hs-tooltip-content invisible absolute z-10 inline-block w-40 rounded bg-gray-900 px-2 py-1 text-center text-xs font-medium text-white opacity-0 shadow-sm transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100 dark:bg-slate-700"
+									className="hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100 invisible absolute z-10 inline-block w-40 rounded bg-gray-900 px-2 py-1 text-center text-xs font-medium text-white opacity-0 shadow-sm transition-opacity dark:bg-slate-700"
 									role="tooltip"
 								>
 									Displayed on public forums, such as Preline
@@ -59,7 +59,7 @@ export default function Page() {
 
 						<div className="sm:col-span-3">
 							<label
-								form="af-account-email"
+								form="af-account-login"
 								className="mt-2.5 inline-block text-sm text-gray-800 dark:text-gray-200"
 							>
 								Email
@@ -68,8 +68,8 @@ export default function Page() {
 
 						<div className="sm:col-span-9">
 							<input
-								id="af-account-email"
-								type="email"
+								id="af-account-login"
+								type="login"
 								className="block w-full rounded-lg border-gray-200 px-3 py-2 pe-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
 								placeholder="maria@site.com"
 							/>

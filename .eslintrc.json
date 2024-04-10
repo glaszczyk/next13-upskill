@@ -56,6 +56,10 @@
 		// we sometimes use async functions that don't await anything
 		"@typescript-eslint/require-await": "off",
 
+		// we sometimes use async functions as handlers
+		"@typescript-eslint/no-misused-promises": "off",
+
+
 		// make sure to `await` inside try…catch
 		"@typescript-eslint/return-await": ["error", "in-try-catch"],
 
