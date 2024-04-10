@@ -12,7 +12,7 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 		const login = formData.get("login");
 		const password = formData.get("password");
 		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/user/login`, {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user/login`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -31,7 +31,7 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 	};
 
 	const handleLogout = async () => {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/user/logout`);
+		const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user/logout`);
 		const responseJson = await response.json();
 		console.log("Logout user", responseJson);
 	};

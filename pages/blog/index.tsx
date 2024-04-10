@@ -52,7 +52,7 @@ const BlogPostList = ({
 
 export async function getStaticProps() {
 	// Call an external API endpoint to get faq
-	const res = await fetch(`${process.env["APP_URL"]}/api/blog`);
+	const res = await fetch(`${process.env["VERCEL_URL"]}/api/blog`);
 	const blogpostListData = await res.json();
 
 	// By returning { props: { blogpostListData } }, the BlogPostList component

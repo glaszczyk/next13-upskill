@@ -20,7 +20,7 @@ const Faq = ({ faq }: { faq: IFaq[] }) => (
 
 export async function getStaticProps() {
 	// Call an external API endpoint to get faq
-	const res = await fetch(`${process.env["APP_URL"]}/api/faq`);
+	const res = await fetch(`${process.env["VERCEL_URL"]}/api/faq`);
 	const faq = await res.json();
 
 	// By returning { props: { faq } }, the Faq component

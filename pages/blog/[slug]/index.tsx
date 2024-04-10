@@ -11,7 +11,7 @@ const BlogPost = ({ blogpostData }: InferGetStaticPropsType<typeof getStaticProp
 export const getStaticProps = (async ({ params }) => {
 	const slug = params && typeof params.slug === "string" ? params.slug : "";
 	// Call an external API endpoint to get faq
-	const res = await fetch(`${process.env["APP_URL"]}/api/blog/${slug}`);
+	const res = await fetch(`${process.env["VERCEL_URL"]}/api/blog/${slug}`);
 	const blogpostData = await res.json();
 
 	// By returning { props: { blogpostListData } }, the BlogPostList component
@@ -27,7 +27,7 @@ export const getStaticProps = (async ({ params }) => {
 
 export const getStaticPaths = async () => {
 	// Call an external API endpoint to get faq
-	const res = await fetch(`${process.env["APP_URL"]}/api/blog`);
+	const res = await fetch(`${process.env["VERCEL_URL"]}/api/blog`);
 	const blogpostListData: IBlogPost[] = await res.json();
 
 	const paths = blogpostListData
