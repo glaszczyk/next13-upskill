@@ -51,10 +51,7 @@ const BlogPostList = ({
 };
 
 export async function getStaticProps() {
-	const endpointUrl =
-		process.env.NODE_ENV === "development"
-			? `http://${process.env["VERCEL_URL"]}/api/blog`
-			: `https://${process.env["VERCEL_URL"]}/api/blog`;
+	const endpointUrl = `${process.env["VERCEL_URL"]}/api/blog`;
 	// Call an external API endpoint to get faq
 	const res = await fetch(endpointUrl);
 	const blogpostListData = await res.json();
