@@ -21,6 +21,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 		res.setHeader(
 			"Set-Cookie",
 			serialize("access-token", token, {
+				sameSite: "strict",
+				path: "/",
 				httpOnly: true,
 			}),
 		);

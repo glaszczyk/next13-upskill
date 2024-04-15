@@ -12,8 +12,8 @@ export class LoggedUsersService implements ILoggedUsersService {
 		this.loggedUsers = this.loggedUsers.filter((user) => userId !== user.userId);
 	}
 
-	getLoggedUser(token: string): number | null {
-		return this.loggedUsers.filter((user) => token === user.token)[0].userId ?? null;
+	getLoggedUser(token: string): ILoggedUser | null {
+		return this.loggedUsers.filter((user) => token === user.token)[0] ?? null;
 	}
 }
 

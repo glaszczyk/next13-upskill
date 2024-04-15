@@ -1,12 +1,12 @@
 import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getUserId } from "@/helpers/getUserId";
 import user from "@/lib/server/services/user";
-import loggedUsers from "@/lib/server/services/loggedUsers";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== "GET") return res.status(405).json({ message: "Method Not Allowed" });
 	const token = req.cookies["access-token"];
-	const userId = token && loggedUsers.getLoggedUser(token);
+	const userId = token && getUserId(token);
 	// const userId = req.query.userId;
 
 	if (!userId) return res.status(400).json({ message: "Bad Request" });

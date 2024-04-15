@@ -1,8 +1,9 @@
 import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from "next";
 import { type FormEvent, type ReactElement, useEffect, useRef, useState } from "react";
+import { getUser } from "@/helpers/getUser";
 import { Layout } from "@/components/index";
 
-const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const loginFormRef = useRef<HTMLFormElement>(null);
 	const [loginError, setLoginError] = useState<string>("");
 	const [origin, setOrigin] = useState("");
@@ -10,7 +11,6 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 		setOrigin(window.location.origin);
 	}, []);
 
-	console.log(origin);
 	const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
@@ -41,6 +41,30 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 		console.log("Logout user", responseJson);
 	};
 
+	if (user) {
+		return (
+			<div className="flex w-full justify-center">
+				<div className="mt-7 w-full max-w-xl rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+					<div className="p-4 sm:p-7">
+						<div className="text-center">
+							<h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+								Welcome {user.userId}
+							</h1>
+						</div>
+						<div className="my-4">
+							<button
+								type="button"
+								className="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-500 hover:border-blue-600 hover:text-blue-600 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:border-blue-600 dark:hover:text-blue-500"
+								onClick={handleLogout}
+							>
+								Sign out
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
 	return (
 		<div className="flex w-full justify-center">
 			<div className="mt-7 w-full max-w-xl rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -137,7 +161,6 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 								</button>
 							</div>
 						</form>
-						<p>{login}</p>
 						<p>{loginError}</p>
 					</div>
 				</div>
@@ -147,15 +170,18 @@ const LoginPage = ({ login }: InferGetServerSidePropsType<typeof getServerSidePr
 };
 
 export const getServerSideProps = async ({ req }: GetServerSidePropsContext) => {
-	if (req.cookies["access-token"]) {
+	console.log(req?.cookies);
+	const token = req?.cookies["access-token"];
+	if (token) {
+		const user = await getUser(token);
 		console.log("Jesteś zalogowany");
 		return {
-			props: { login: "Test user" },
+			props: { user },
 		};
 	} else {
 		console.log("Nie jesteś zalogowany");
 		return {
-			props: { login: "" },
+			props: { user: null },
 		};
 	}
 };
