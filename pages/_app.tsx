@@ -17,13 +17,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
 
 	return getLayout(
-		<SWRConfig
-			value={{
-				dedupingInterval: 100,
-				refreshInterval: 100,
-				fallback: { a: 1, b: 1 },
-			}}
-		>
+		<SWRConfig value={{ provider: () => new Map() }}>
 			<Component {...pageProps} />
 		</SWRConfig>,
 	);
