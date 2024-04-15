@@ -1,3 +1,5 @@
+import { type ProductCartParams } from "@/helpers/useAddProduct";
+
 export type ProductsListItem = {
 	productId: number;
 	title: string;
@@ -10,10 +12,12 @@ export type ProductsListItem = {
 
 export type ProductsListItemProps = {
 	product: ProductsListItem;
+	addToCart: (product: ProductCartParams) => void;
 };
 
 export const ProductsListItem = ({
 	product: { category, description, productId, image, price, stock, title },
+	addToCart,
 }: ProductsListItemProps) => {
 	const productUrl = `/products/${productId}`;
 	return (
@@ -40,8 +44,9 @@ export const ProductsListItem = ({
 				<button
 					type="button"
 					className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+					onClick={() => addToCart({ price, productId })}
 				>
-					Add to cart {productId}
+					Add to cart
 				</button>
 			</div>
 		</li>
