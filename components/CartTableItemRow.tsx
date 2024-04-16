@@ -1,17 +1,10 @@
-export type CartItem = {
-	id: number;
-	alt: string;
-	title: string;
-	image: string;
-	price: number;
-	quantity: number;
-};
+import { type IProduct } from "@models/products";
 
 type CartTableItemRowProps = {
-	item: CartItem;
+	item: Partial<IProduct & { quantity: number; message?: string }>;
 };
 export const CartTableItemRow = ({
-	item: { id, image, alt, title, price, quantity },
+	item: { productId, image, title, price, quantity },
 }: CartTableItemRowProps) => {
 	return (
 		<tr className="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
@@ -21,11 +14,11 @@ export const CartTableItemRow = ({
 						<img
 							className="h-[2.375rem] w-[2.375rem] flex-shrink-0 rounded-lg"
 							src={image}
-							alt={alt}
+							alt={title}
 						/>
 						<div>
 							<span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-								{title} (id: {id})
+								{title} (id: {productId})
 							</span>
 						</div>
 					</div>
@@ -49,7 +42,9 @@ export const CartTableItemRow = ({
 			</td>
 			<td className="h-px w-px whitespace-nowrap align-middle">
 				<div className="flex justify-end gap-x-3">
-					<span className="text-sm text-gray-600 dark:text-gray-400">{quantity * price}</span>
+					<span className="text-sm text-gray-600 dark:text-gray-400">
+						{quantity && price ? quantity * price : "-"}
+					</span>
 				</div>
 			</td>
 			<td>

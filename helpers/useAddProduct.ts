@@ -1,7 +1,7 @@
 import useSWRMutation from "swr/mutation";
 import type { IProduct } from "@models/products";
 
-export type ProductCartParams = Pick<IProduct, "productId" | "price">;
+export type ProductCartParams = Pick<IProduct, "productId">;
 
 type AddProductRequestParams = {
 	userId: number;
@@ -17,11 +17,11 @@ type Message =
 const addProductToCart = async (url: string, { arg }: { arg: AddProductRequestParams }) => {
 	const {
 		userId,
-		product: { productId, price },
+		product: { productId },
 	} = arg;
 	const body = {
 		userId,
-		items: [{ productId, quantity: 1, price }],
+		cart: [{ productId, quantity: 1 }],
 	};
 	try {
 		const r = await fetch(url, {
@@ -40,8 +40,11 @@ export const useAddProduct = () => {
 		error,
 		trigger: handleAddProductToCart,
 	} = useSWRMutation<Message, Message, string, AddProductRequestParams>(
-		`/api/orders`,
+		`/api/user/cart`,
 		(url: string, params) => addProductToCart(url, params),
+		{
+			revalidate: true,
+		},
 	);
 	return {
 		addProductSuccessMessage: data && data.message ? data.message : "",

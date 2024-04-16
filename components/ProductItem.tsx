@@ -1,4 +1,4 @@
-import { type ProductCartParams } from "@/pages/products/index";
+import { type ProductCartParams } from "@/helpers/useAddProduct";
 import { type IProduct } from "@models/products";
 
 type ProductItemProps = {
@@ -32,7 +32,7 @@ export const ProductItem = ({
 					<button
 						type="button"
 						className="mb-2 mt-6 inline-flex w-fit items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-						onClick={() => addToCart({ productId, price, stock })}
+						onClick={() => addToCart({ productId })}
 					>
 						Add to cart
 					</button>

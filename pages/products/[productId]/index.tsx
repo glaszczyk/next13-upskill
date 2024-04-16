@@ -6,6 +6,7 @@ import type {
 import { useRouter } from "next/router";
 import type { ReactElement } from "react";
 import useSWR, { type Fetcher } from "swr";
+import { getProductData } from "@/helpers/getProductData";
 import { type ProductCartParams, useAddProduct } from "@/helpers/useAddProduct";
 import { getLoggedUserId } from "@/lib/server/utils/getLoginStatus";
 import { Layout } from "@/components/index";
@@ -63,11 +64,10 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 	const userId = await getLoggedUserId(context.req);
 	if (userId && productId && typeof productId === "string") {
 		try {
-			const response = await fetch(`${process.env.API_URL}/api/products/${productId}`);
-			const result: Partial<IProduct & { message?: string }> = await response.json();
+			const productData = await getProductData(productId);
 			return {
 				props: {
-					productData: { ...result },
+					productData,
 					userId,
 				},
 			};
