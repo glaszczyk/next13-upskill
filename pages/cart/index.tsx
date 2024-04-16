@@ -4,6 +4,7 @@ import {
 	type InferGetServerSidePropsType,
 } from "next";
 import type { ReactElement } from "react";
+import { useAddProduct } from "@/helpers/useAddProduct";
 import { getQuantity } from "@/helpers/getQuantity";
 import { getProductData } from "@/helpers/getProductData";
 import { type IProduct } from "@models/products";
@@ -15,13 +16,34 @@ import { CartTableItemRow } from "@/components/CartTableItemRow";
 const CartPage = ({
 	cartItems,
 	message,
+	userId,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+	const { handleAddProductToCart, addProductErrorMessage, addProductSuccessMessage } =
+		useAddProduct();
+
+	const handleRemoveProject = async (productId: number) => {
+		if (productId) {
+			const updatedCart = cartItems
+				.filter(({ productId: cartProductId }) => productId !== cartProductId)
+				.map(
+					({ productId, quantity }) =>
+						({
+							productId,
+							quantity,
+						}) as ICartItem,
+				);
+			updatedCart && userId && (await handleAddProductToCart({ userId, cart: updatedCart }));
+		}
+	};
+
 	return (
 		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 			<div className="flex flex-col">
 				<div className="-m-1.5 overflow-x-auto">
 					<div className="inline-block min-w-full p-1.5 align-middle">
 						<div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900">
+							{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
+							{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
 							<table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
 								<thead className="bg-gray-50 dark:bg-slate-800">
 									<tr>
@@ -68,7 +90,11 @@ const CartPage = ({
 
 								<tbody className="divide-y divide-gray-200 dark:divide-gray-700">
 									{cartItems.map((item) => (
-										<CartTableItemRow key={item.productId} item={item} />
+										<CartTableItemRow
+											key={item.productId}
+											item={item}
+											removeProduct={(id: number) => handleRemoveProject(id)}
+										/>
 									))}
 								</tbody>
 							</table>
@@ -93,19 +119,20 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 			const allProducts = await Promise.all(productsPromises);
 			const cartItems = allProducts.map((product) => {
 				const quantity = getQuantity(data, product.productId);
-				return { ...product, quantity };
+				return { ...product, quantity, userId };
 			});
-			return { props: { cartItems } };
+			return { props: { cartItems, userId } };
 		} catch (error) {
 			if (error instanceof Error) {
-				return { props: { cartItems: [], message: error.message } };
+				return { props: { cartItems: [], message: error.message, userId } };
 			}
 		}
 	}
-	return { props: { cartItems: [], message: "User not logged in" } };
+	return { props: { cartItems: [], message: "User not logged in", userId: null } };
 }) satisfies GetServerSideProps<{
 	cartItems: Partial<IProduct & { quantity: number; message?: string }>[];
 	message?: string;
+	userId: number | null;
 }>;
 
 CartPage.getLayout = function getLayout(page: ReactElement) {
