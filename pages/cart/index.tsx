@@ -91,8 +91,6 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 				getProductData(productId.toString()),
 			);
 			const allProducts = await Promise.all(productsPromises);
-			console.log(allProducts, data);
-
 			const cartItems = allProducts.map((product) => {
 				const quantity = getQuantity(data, product.productId);
 				return { ...product, quantity };

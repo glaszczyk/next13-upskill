@@ -1,9 +1,9 @@
-import { type ProductCartParams } from "@/helpers/useAddProduct";
+import { type ICartItem } from "@models/carts";
 import { type IProduct } from "@models/products";
 
 export type ProductsListItemProps = {
 	product: IProduct;
-	addToCart: (product: ProductCartParams) => void;
+	addToCart: (product: Pick<ICartItem, "productId">) => void;
 };
 
 export const ProductsListItem = ({

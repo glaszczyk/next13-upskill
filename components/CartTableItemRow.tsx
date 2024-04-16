@@ -17,7 +17,7 @@ export const CartTableItemRow = ({
 							alt={title}
 						/>
 						<div>
-							<span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+							<span className="block max-w-lg whitespace-pre-wrap text-sm font-semibold text-gray-800 dark:text-gray-200">
 								{title} (id: {productId})
 							</span>
 						</div>

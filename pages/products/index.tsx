@@ -4,12 +4,14 @@ import {
 	type InferGetServerSidePropsType,
 } from "next";
 import { useRouter } from "next/router";
-import { type ReactElement } from "react";
+import { type ReactElement, useState } from "react";
 import useSWR, { type Fetcher } from "swr";
+import { aggregateCart } from "@/helpers/aggregateCart";
+import type { ICartItem } from "@models/carts";
 import { getLoggedUserId } from "@/lib/server/utils/getLoginStatus";
-import { type ProductCartParams, useAddProduct } from "@/helpers/useAddProduct";
+import { useAddProduct } from "@/helpers/useAddProduct";
 import { Layout, Pagination } from "@/components/index";
-import { type IProductResponse } from "@models/products";
+import { type IProduct, type IProductResponse } from "@models/products";
 import { ProductsListItem } from "@/components/ProductsListItem";
 
 const fetcher: Fetcher<IProductResponse> = (url: string) => fetch(url).then((r) => r.json());
@@ -20,7 +22,9 @@ const ProductsListPage = ({
 	products,
 	meta,
 	userId,
+	cart,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+	const [userCart, setUserCart] = useState<ICartItem[]>(cart);
 	const {
 		query: { page },
 	} = useRouter();
@@ -33,9 +37,11 @@ const ProductsListPage = ({
 	const { handleAddProductToCart, addProductErrorMessage, addProductSuccessMessage } =
 		useAddProduct();
 
-	const handleAddToCart = async (product: ProductCartParams) => {
+	const handleAddToCart = async (product: Pick<ICartItem, "productId">) => {
 		if (userId && product) {
-			await handleAddProductToCart({ userId, product });
+			const updatedCart = aggregateCart(userCart, product);
+			setUserCart(updatedCart);
+			await handleAddProductToCart({ userId, cart: [...updatedCart] });
 		}
 	};
 
@@ -70,10 +76,22 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 	const response = await fetch(`${process.env.API_URL}/api/products?page=${activePage}`);
 	const { meta, products } = await response.json();
 	const userId = await getLoggedUserId(context.req);
+	if (userId) {
+		const response = await fetch(`${process.env.API_URL}/api/user/cart?userId=${userId}`);
+		const cart: Partial<IProduct & { message?: string }> = await response.json();
+		return {
+			props: {
+				products,
+				meta,
+				userId,
+				cart: cart && typeof cart.message === "string" ? [] : (cart as ICartItem[]),
+			},
+		};
+	}
 	return {
-		props: { products, meta, userId },
+		props: { products, meta, userId: null, cart: [] },
 	};
-}) satisfies GetServerSideProps<IProductResponse & { userId: number | null }>;
+}) satisfies GetServerSideProps<IProductResponse & { userId: number | null; cart: ICartItem[] }>;
 
 ProductsListPage.getLayout = function getLayout(page: ReactElement) {
 	return <Layout>{page}</Layout>;

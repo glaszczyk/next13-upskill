@@ -1,11 +1,9 @@
 import useSWRMutation from "swr/mutation";
-import type { IProduct } from "@models/products";
-
-export type ProductCartParams = Pick<IProduct, "productId">;
+import { type ICartItem } from "@models/carts";
 
 type AddProductRequestParams = {
 	userId: number;
-	product: ProductCartParams;
+	cart: ICartItem[];
 };
 
 type Message =
@@ -15,13 +13,10 @@ type Message =
 	| undefined;
 
 const addProductToCart = async (url: string, { arg }: { arg: AddProductRequestParams }) => {
-	const {
-		userId,
-		product: { productId },
-	} = arg;
+	const { userId, cart } = arg;
 	const body = {
 		userId,
-		cart: [{ productId, quantity: 1 }],
+		cart,
 	};
 	try {
 		const r = await fetch(url, {
