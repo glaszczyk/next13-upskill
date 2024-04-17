@@ -170,7 +170,6 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 };
 
 export const getServerSideProps = async ({ req }: GetServerSidePropsContext) => {
-	console.log(req?.cookies);
 	const token = req?.cookies["access-token"];
 	if (token) {
 		const user = await getUser(token);

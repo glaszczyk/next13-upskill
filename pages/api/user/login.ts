@@ -26,7 +26,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				httpOnly: true,
 			}),
 		);
-		loggedInUser.userId && loggedUsers.addLoggedUser(loggedInUser.userId, token);
+		if (loggedInUser.userId) {
+			loggedUsers.addLoggedUser(loggedInUser.userId, token);
+		}
 		return res.status(200).json({
 			userId: loggedInUser.userId,
 			firstName: loggedInUser.firstName,

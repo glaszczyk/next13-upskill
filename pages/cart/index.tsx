@@ -3,6 +3,7 @@ import {
 	type GetServerSidePropsContext,
 	type InferGetServerSidePropsType,
 } from "next";
+import Link from "next/link";
 import type { ReactElement } from "react";
 import { useAddProduct } from "@/helpers/useAddProduct";
 import { getQuantity } from "@/helpers/getQuantity";
@@ -35,6 +36,24 @@ const CartPage = ({
 			updatedCart && userId && (await handleAddProductToCart({ userId, cart: updatedCart }));
 		}
 	};
+
+	if (cartItems.length === 0) {
+		return (
+			<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+				<div className="flex flex-col">
+					<div className="-m-1.5 overflow-x-auto">
+						<div className="inline-block min-w-full p-1.5 align-middle">
+							<div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900">
+								{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
+								{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
+								<p>Your cart is empty</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -100,6 +119,13 @@ const CartPage = ({
 							</table>
 							<p>{message}</p>
 						</div>
+						<Link
+							shallow
+							href="/checkout"
+							className="my-8 inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+						>
+							Checkout
+						</Link>
 					</div>
 				</div>
 			</div>
