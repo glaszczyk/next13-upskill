@@ -1,19 +1,14 @@
-export type ProductsListItem = {
-	productId: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	stock: number;
-};
+import { type ICartItem } from "@models/carts";
+import { type IProduct } from "@models/products";
 
 export type ProductsListItemProps = {
-	product: ProductsListItem;
+	product: IProduct;
+	addToCart: (product: Pick<ICartItem, "productId">) => void;
 };
 
 export const ProductsListItem = ({
 	product: { category, description, productId, image, price, stock, title },
+	addToCart,
 }: ProductsListItemProps) => {
 	const productUrl = `/products/${productId}`;
 	return (
@@ -40,8 +35,9 @@ export const ProductsListItem = ({
 				<button
 					type="button"
 					className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+					onClick={() => addToCart({ productId })}
 				>
-					Add to cart {productId}
+					Add to cart
 				</button>
 			</div>
 		</li>
