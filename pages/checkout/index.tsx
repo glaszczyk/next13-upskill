@@ -5,13 +5,16 @@ import type {
 } from "next";
 import { useRouter } from "next/router";
 import { type ReactElement, useEffect } from "react";
+import { type ICartItem } from "@models/carts";
 import { getLoggedUserId } from "@/lib/server/utils/getLoginStatus";
 import { Layout } from "@/components/index";
+
+const successMessage = "Checkout successfully.";
 
 const CheckoutPage = ({ message }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const router = useRouter();
 	useEffect(() => {
-		void router.push("/");
+		if (message === successMessage) void router.push("/");
 	});
 
 	return (
@@ -33,13 +36,20 @@ export const getServerSideProps = (async (context: GetServerSidePropsContext) =>
 	const userId = await getLoggedUserId(context.req);
 	if (userId) {
 		try {
-			const response = await fetch(`${process.env.API_URL}/api/user/cart?userId=${userId}`, {
-				method: "DELETE",
+			const cartResponse = await fetch(`${process.env.API_URL}/api/user/cart?userId=${userId}`);
+			const data: ICartItem[] = await cartResponse.json();
+			const items = data.map((item: ICartItem) => ({ ...item, price: 10 }));
+			const orderResponse = await fetch(`${process.env.API_URL}/api/orders`, {
+				method: "POST",
+				body: JSON.stringify({ userId, items: [...items] }),
 			});
-
-			const responseJson = await response.json();
-			console.log(responseJson);
-			return { props: { message: responseJson.message } };
+			if (orderResponse.ok) {
+				await fetch(`${process.env.API_URL}/api/user/cart?userId=${userId}`, {
+					method: "DELETE",
+				});
+				return { props: { message: successMessage } };
+			}
+			return { props: { message: orderResponse.statusText } };
 		} catch (error) {
 			if (error instanceof Error) {
 				return { props: { message: error.message } };
