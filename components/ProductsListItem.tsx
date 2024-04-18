@@ -1,9 +1,11 @@
+import { useState } from "react";
+import { Counter } from "@/components/Counter";
 import { type ICartItem } from "@models/carts";
 import { type IProduct } from "@models/products";
 
 export type ProductsListItemProps = {
 	product: IProduct;
-	addToCart: (product: Pick<ICartItem, "productId">) => void;
+	addToCart: (product: ICartItem) => void;
 };
 
 export const ProductsListItem = ({
@@ -11,6 +13,7 @@ export const ProductsListItem = ({
 	addToCart,
 }: ProductsListItemProps) => {
 	const productUrl = `/products/${productId}`;
+	const [quantity, setQuantity] = useState(stock > 0 ? 1 : 0);
 	return (
 		<li className="flex flex-col rounded-xl border bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
 			<div className="mb-6 flex justify-start">
@@ -35,10 +38,11 @@ export const ProductsListItem = ({
 				<button
 					type="button"
 					className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-					onClick={() => addToCart({ productId })}
+					onClick={() => addToCart({ productId, quantity })}
 				>
 					Add to cart
 				</button>
+				<Counter maxAmount={stock} changeAmount={(newAmount) => setQuantity(newAmount)} />
 			</div>
 		</li>
 	);

@@ -22,7 +22,7 @@ const CartPage = ({
 	const { handleAddProductToCart, addProductErrorMessage, addProductSuccessMessage } =
 		useAddProduct();
 
-	const handleRemoveProject = async (productId: number) => {
+	const handleRemoveProduct = async (productId: number) => {
 		if (productId) {
 			const updatedCart = cartItems
 				.filter(({ productId: cartProductId }) => productId !== cartProductId)
@@ -112,7 +112,7 @@ const CartPage = ({
 										<CartTableItemRow
 											key={item.productId}
 											item={item}
-											removeProduct={(id: number) => handleRemoveProject(id)}
+											removeProduct={(id: number) => handleRemoveProduct(id)}
 										/>
 									))}
 								</tbody>

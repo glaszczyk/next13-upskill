@@ -37,7 +37,7 @@ const ProductsListPage = ({
 	const { handleAddProductToCart, addProductErrorMessage, addProductSuccessMessage } =
 		useAddProduct();
 
-	const handleAddToCart = async (product: Pick<ICartItem, "productId">) => {
+	const handleAddToCart = async (product: ICartItem) => {
 		if (userId && product) {
 			const updatedCart = aggregateCart(userCart, product);
 			setUserCart(updatedCart);

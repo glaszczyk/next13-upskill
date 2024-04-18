@@ -6,7 +6,9 @@ export async function middleware(request: NextRequest) {
 		const userId = request.cookies.get("access-token");
 		if (!userId) {
 			console.log("Redirect from middleware");
-			return NextResponse.rewrite(new URL("/login", request.url));
+			const loginUrl = new URL("/login", request.url);
+			loginUrl.searchParams.set("from", request.nextUrl.pathname);
+			return NextResponse.redirect(loginUrl);
 		}
 	}
 }
