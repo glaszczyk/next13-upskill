@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { type IProduct } from "@models/products";
 
 type CartTableItemRowProps = {
@@ -14,29 +16,33 @@ export const CartTableItemRow = ({
 	return (
 		<tr className="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
 			<td className="h-px w-px whitespace-nowrap align-middle">
-				<a className="block p-6" href="#">
+				<Link className="block p-6" href="#" shallow>
 					<div className="flex items-center gap-x-4">
-						<img
-							className="h-[2.375rem] w-[2.375rem] flex-shrink-0 rounded-lg"
-							src={image}
-							alt={title}
-						/>
+						{image && title && (
+							<Image
+								className="h-[2.375rem] w-[2.375rem] flex-shrink-0 rounded-lg"
+								src={image}
+								alt={title}
+								width={38}
+								height={38}
+							/>
+						)}
 						<div>
 							<span className="block max-w-lg whitespace-pre-wrap text-sm font-semibold text-gray-800 dark:text-gray-200">
 								{title} (id: {productId})
 							</span>
 						</div>
 					</div>
-				</a>
+				</Link>
 			</td>
 			<td className="h-px w-px whitespace-nowrap align-middle">
-				<a className="block p-6" href="#">
+				<Link className="block p-6" href="#" shallow>
 					<div className="flex justify-end gap-x-3">
 						<span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
 							{price}
 						</span>
 					</div>
-				</a>
+				</Link>
 			</td>
 			<td className="h-px align-middle">
 				<div className="flex justify-end gap-x-3">

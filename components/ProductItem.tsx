@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { type ICartItem } from "@models/carts";
 import { type IProduct } from "@models/products";
 
@@ -13,11 +14,13 @@ export const ProductItem = ({
 	return (
 		<div className="rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] sm:flex">
 			<div className="relative w-full flex-shrink-0 overflow-hidden rounded-t-xl sm:max-w-[15rem] sm:rounded-s-xl md:max-w-md md:rounded-se-none">
-				<img
+				<Image
 					className="start-0 top-0 aspect-square object-contain p-6"
 					src={image}
 					alt={description}
-				></img>
+					width={500}
+					height={500}
+				/>
 			</div>
 			<div className="flex flex-wrap">
 				<div className="flex h-full flex-col p-4 sm:p-7">

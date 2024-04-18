@@ -1,4 +1,5 @@
 import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from "next";
+import Link from "next/link";
 import { type FormEvent, type ReactElement, useEffect, useRef, useState } from "react";
 import { getUser } from "@/helpers/getUser";
 import { Layout } from "@/components/index";
@@ -112,12 +113,13 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 										<label form="password" className="mb-2 block text-sm dark:text-white">
 											Password
 										</label>
-										<a
+										<Link
+											shallow
 											className="text-sm font-medium text-blue-600 decoration-2 hover:underline dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 											href="#"
 										>
 											Forgot password?
-										</a>
+										</Link>
 									</div>
 									<div className="relative">
 										<input

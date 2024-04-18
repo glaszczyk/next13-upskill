@@ -54,7 +54,8 @@ export const Pagination = ({ route, meta }: PaginationProps) => {
 				</span>
 			</div>
 			{navigation.next && (
-				<a
+				<Link
+					shallow
 					className="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-2 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
 					href={pageUrl(navigation.next)}
 				>
@@ -75,7 +76,7 @@ export const Pagination = ({ route, meta }: PaginationProps) => {
 					>
 						<path d="m9 18 6-6-6-6" />
 					</svg>
-				</a>
+				</Link>
 			)}
 		</nav>
 	);

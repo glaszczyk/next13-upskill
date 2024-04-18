@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { type ICartItem } from "@models/carts";
 import { type IProduct } from "@models/products";
 
@@ -18,13 +20,15 @@ export const ProductsListItem = ({
 					{category}
 				</span>
 			</div>
-			<a href={productUrl}>
-				<img
+			<Link href={productUrl}>
+				<Image
 					className="aspect-square h-auto  w-full rounded-t-xl object-contain"
 					src={image}
 					alt={description}
+					width={300}
+					height={300}
 				/>
-			</a>
+			</Link>
 			<div className="mt-6">
 				<h2 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">{title}</h2>
 				<p className="mt-1 text-gray-500 dark:text-gray-400">{description}</p>

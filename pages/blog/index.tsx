@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactElement } from "react";
 import { CustomMeta, Layout } from "@/components/index";
 import { type IBlogPost } from "@models/blog";
@@ -27,7 +28,8 @@ const BlogPostList = ({
 					))}
 				</div>
 				<div className="mt-12 text-center">
-					<a
+					<Link
+						shallow
 						className="inline-flex items-center gap-x-1 rounded-full border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-blue-600 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-blue-500 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 						href="#"
 					>
@@ -46,7 +48,7 @@ const BlogPostList = ({
 						>
 							<path d="m9 18 6-6-6-6" />
 						</svg>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</>
