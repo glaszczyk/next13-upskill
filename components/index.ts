@@ -1,4 +1,5 @@
 import { AppHeader } from "./AppHeader";
+import { CustomMeta } from "./CustomMeta";
 import { BlogPostItem } from "./BlogPostItem";
 import { BlogPostListItem } from "./BlogPostListItem";
 import { FaqItem } from "./FaqItem";
@@ -9,6 +10,7 @@ import { Layout } from "./Layout";
 
 export {
 	AppHeader,
+	CustomMeta,
 	BlogPostItem,
 	BlogPostListItem,
 	FaqItem,

@@ -11,7 +11,7 @@ import { aggregateCart } from "@/helpers/aggregateCart";
 import { getProductData } from "@/helpers/getProductData";
 import { useAddProduct } from "@/helpers/useAddProduct";
 import { getLoggedUserId } from "@/lib/server/utils/getLoginStatus";
-import { Layout } from "@/components/index";
+import { CustomMeta, Layout } from "@/components/index";
 import { type IProduct } from "@models/products";
 import { ProductItem } from "@/components/ProductItem";
 
@@ -50,6 +50,9 @@ const SingleProductPage = ({
 		if (data.message) return <p>{data.message}</p>;
 		return (
 			<>
+				<CustomMeta title={data.title || "ACME product"}>
+					<meta name="description" content={data.description || "Meet our great products"} />
+				</CustomMeta>
 				{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
 				{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
 				{!userId && <p>{defaultMessage}</p>}

@@ -11,7 +11,7 @@ import { getProductData } from "@/helpers/getProductData";
 import { type IProduct } from "@models/products";
 import { type ICartItem } from "@models/carts";
 import { getLoggedUserId } from "@/lib/server/utils/getLoginStatus";
-import { Layout } from "@/components/index";
+import { CustomMeta, Layout } from "@/components/index";
 import { CartTableItemRow } from "@/components/CartTableItemRow";
 
 const CartPage = ({
@@ -39,6 +39,28 @@ const CartPage = ({
 
 	if (cartItems.length === 0) {
 		return (
+			<>
+				<CustomMeta title="Your cart is empty but you still can buy some ACME products" />
+				<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+					<div className="flex flex-col">
+						<div className="-m-1.5 overflow-x-auto">
+							<div className="inline-block min-w-full p-1.5 align-middle">
+								<div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900">
+									{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
+									{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
+									<p>Your cart is empty</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	}
+
+	return (
+		<>
+			<CustomMeta title="Here is your cart with ACME products" />
 			<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 				<div className="flex flex-col">
 					<div className="-m-1.5 overflow-x-auto">
@@ -46,90 +68,74 @@ const CartPage = ({
 							<div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900">
 								{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
 								{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
-								<p>Your cart is empty</p>
+								<table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+									<thead className="bg-gray-50 dark:bg-slate-800">
+										<tr>
+											<th scope="col" className="w-96 px-6 py-3 text-start">
+												<div className="flex items-center gap-x-2">
+													<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+														Product
+													</span>
+												</div>
+											</th>
+
+											<th scope="col" className="w-36 px-6 py-3">
+												<div className="flex items-center justify-center  gap-x-2">
+													<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+														Price per item
+													</span>
+												</div>
+											</th>
+
+											<th scope="col" className="w-36 px-6 py-3">
+												<div className="flex items-center justify-center gap-x-2">
+													<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+														Quantity
+													</span>
+												</div>
+											</th>
+
+											<th scope="col" className="w-36 px-6 py-3">
+												<div className="flex items-center justify-center  gap-x-2">
+													<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+														Product total
+													</span>
+												</div>
+											</th>
+											<th scope="col" className="px-6 py-3 text-start">
+												<div className="flex items-center justify-center gap-x-2">
+													<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+														Delete product
+													</span>
+												</div>
+											</th>
+										</tr>
+									</thead>
+
+									<tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+										{cartItems.map((item) => (
+											<CartTableItemRow
+												key={item.productId}
+												item={item}
+												removeProduct={(id: number) => handleRemoveProject(id)}
+											/>
+										))}
+									</tbody>
+								</table>
+								<p>{message}</p>
 							</div>
+							<Link
+								shallow
+								href="/checkout"
+								className="my-8 inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+							>
+								Checkout
+							</Link>
 						</div>
 					</div>
 				</div>
 			</div>
-		);
-	}
-
-	return (
-		<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-			<div className="flex flex-col">
-				<div className="-m-1.5 overflow-x-auto">
-					<div className="inline-block min-w-full p-1.5 align-middle">
-						<div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900">
-							{addProductSuccessMessage && <p>{addProductSuccessMessage}</p>}
-							{addProductErrorMessage && <p>{addProductErrorMessage}</p>}
-							<table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-								<thead className="bg-gray-50 dark:bg-slate-800">
-									<tr>
-										<th scope="col" className="w-96 px-6 py-3 text-start">
-											<div className="flex items-center gap-x-2">
-												<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-													Product
-												</span>
-											</div>
-										</th>
-
-										<th scope="col" className="w-36 px-6 py-3">
-											<div className="flex items-center justify-center  gap-x-2">
-												<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-													Price per item
-												</span>
-											</div>
-										</th>
-
-										<th scope="col" className="w-36 px-6 py-3">
-											<div className="flex items-center justify-center gap-x-2">
-												<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-													Quantity
-												</span>
-											</div>
-										</th>
-
-										<th scope="col" className="w-36 px-6 py-3">
-											<div className="flex items-center justify-center  gap-x-2">
-												<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-													Product total
-												</span>
-											</div>
-										</th>
-										<th scope="col" className="px-6 py-3 text-start">
-											<div className="flex items-center justify-center gap-x-2">
-												<span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-													Delete product
-												</span>
-											</div>
-										</th>
-									</tr>
-								</thead>
-
-								<tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-									{cartItems.map((item) => (
-										<CartTableItemRow
-											key={item.productId}
-											item={item}
-											removeProduct={(id: number) => handleRemoveProject(id)}
-										/>
-									))}
-								</tbody>
-							</table>
-							<p>{message}</p>
-						</div>
-						<Link
-							shallow
-							href="/checkout"
-							className="my-8 inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-						>
-							Checkout
-						</Link>
-					</div>
-				</div>
-			</div>
-		</div>
+		</>
 	);
 };
 

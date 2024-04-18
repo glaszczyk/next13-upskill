@@ -1,11 +1,18 @@
 import { type GetStaticProps, type InferGetStaticPropsType } from "next";
 import type { ReactElement } from "react";
-import { Layout } from "@/components/index";
+import { CustomMeta, Layout } from "@/components/index";
 import { type IBlogPost } from "@models/blog";
 import { BlogPostItem } from "@/components/BlogPostItem";
 
 const BlogPost = ({ blogpostData }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	return <BlogPostItem post={blogpostData} />;
+	return (
+		<>
+			<CustomMeta title={blogpostData.title}>
+				<meta name="author" content={blogpostData.author.name} />
+			</CustomMeta>
+			<BlogPostItem post={blogpostData} />
+		</>
+	);
 };
 
 export const getStaticProps = (async ({ params }) => {

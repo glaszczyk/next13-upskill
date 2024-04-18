@@ -1,10 +1,11 @@
 import type { ReactElement } from "react";
-import { Layout } from "@/components/index";
+import { CustomMeta, Layout } from "@/components/index";
 import { FaqItem } from "@/components/FaqItem";
 import { type IFaq } from "@models/faq";
 
 const Faq = ({ faq }: { faq: IFaq[] }) => (
 	<>
+		<CustomMeta title="You'll find here all interesting information about our services and products. Feel free to reach us." />
 		<div className="mx-auto mb-10 max-w-2xl lg:mb-14">
 			<h2 className="text-2xl font-bold dark:text-white md:text-4xl md:leading-tight">
 				You might be wondering...
