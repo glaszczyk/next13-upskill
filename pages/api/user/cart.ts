@@ -24,9 +24,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	}
 
 	if (req.method === "POST") {
-		const userId = req.body.userId;
-		const cartItems = req.body.cart;
-
+		const reqBody = JSON.parse(req.body);
+		const userId = reqBody.userId;
+		const cartItems = reqBody.cart;
 		if (!userId || !cartItems) return res.status(400).json({ message: "Bad Request" });
 
 		try {
