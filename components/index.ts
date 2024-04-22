@@ -1,3 +1,4 @@
+import { AppFooter } from "./AppFooter";
 import { AppHeader } from "./AppHeader";
 import { CustomMeta } from "./CustomMeta";
 import { BlogPostItem } from "./BlogPostItem";
@@ -9,6 +10,7 @@ import { Pagination } from "./Pagination";
 import { Layout } from "./Layout";
 
 export {
+	AppFooter,
 	AppHeader,
 	CustomMeta,
 	BlogPostItem,
