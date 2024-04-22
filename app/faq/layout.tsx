@@ -5,6 +5,8 @@ type FaqLayoutProps = {
 	children: ReactNode;
 };
 
-export default function Layout({ children }: FaqLayoutProps) {
+const Layout = ({ children }: FaqLayoutProps) => {
 	return <FaqLayout>{children}</FaqLayout>;
-}
+};
+
+export default Layout;

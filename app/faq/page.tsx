@@ -1,12 +1,12 @@
 import { FaqItem } from "@/components/index";
-import type { IFaq } from "@models/faq";
+import { type IFaq } from "@models/faq";
 
 async function getFaqItems(): Promise<IFaq[]> {
 	const res = await fetch(`${process.env.API_URL}/api/faq`);
-	return res.json();
+	return (await res.json()) as Promise<IFaq[]>;
 }
 
-export default async function Page() {
+const FaqPage = async () => {
 	const faqItems = await getFaqItems();
 	return (
 		<>
@@ -22,4 +22,6 @@ export default async function Page() {
 			</div>
 		</>
 	);
-}
+};
+
+export default FaqPage;

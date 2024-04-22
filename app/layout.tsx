@@ -7,10 +7,12 @@ export const metadata: Metadata = {
 	description: "We're happy to meet you.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const RootLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<html lang="en">
 			<body>{children}</body>
 		</html>
 	);
-}
+};
+
+export default RootLayout;
