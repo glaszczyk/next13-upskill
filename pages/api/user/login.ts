@@ -1,5 +1,11 @@
+import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
+import loggedUsers from "@services/loggedUsers";
 import user from "@/lib/server/services/user";
+
+const generateAccessToken = () => {
+	return Math.floor(Math.random() * 1000).toString();
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== "POST") return res.status(405).json({ message: "Method Not Allowed" });
@@ -11,7 +17,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	try {
 		const loggedInUser = user.logUserIn(login, password);
-		res.status(200).json({
+		const token = generateAccessToken();
+		res.setHeader(
+			"Set-Cookie",
+			serialize("access-token", token, {
+				sameSite: "strict",
+				path: "/",
+				httpOnly: true,
+			}),
+		);
+		if (loggedInUser.userId) {
+			loggedUsers.addLoggedUser(loggedInUser.userId, token);
+		}
+		return res.status(200).json({
 			userId: loggedInUser.userId,
 			firstName: loggedInUser.firstName,
 			lastName: loggedInUser.lastName,
