@@ -1,6 +1,12 @@
-import { type GetServerSidePropsContext, type InferGetServerSidePropsType } from "next";
+import {
+	type GetServerSideProps,
+	type GetServerSidePropsContext,
+	type InferGetServerSidePropsType,
+} from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { type FormEvent, type ReactElement, useEffect, useRef, useState } from "react";
+import { type ILoggedUser } from "@models/loggedUsers";
 import { getUser } from "@/helpers/getUser";
 import { Layout } from "@/components/index";
 
@@ -8,8 +14,12 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 	const loginFormRef = useRef<HTMLFormElement>(null);
 	const [loginError, setLoginError] = useState<string>("");
 	const [origin, setOrigin] = useState("");
+	const [redirectUrl, setRedirectUrl] = useState("");
+	const router = useRouter();
 	useEffect(() => {
 		setOrigin(window.location.origin);
+		const searchParams = new URLSearchParams(window.location.search);
+		setRedirectUrl(searchParams.get("from") || "");
 	}, []);
 
 	const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,6 +40,10 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 				setLoginError(responseJson.message);
 			} else {
 				loginFormRef.current?.reset();
+				if (redirectUrl) {
+					void router.push(`${redirectUrl}`);
+				}
+				void router.push("/login");
 			}
 		} catch (error) {
 			if (error instanceof Error) console.error(error.message);
@@ -40,6 +54,7 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 		const response = await fetch(`${origin}/api/user/logout`);
 		const responseJson = await response.json();
 		console.log("Logout user", responseJson);
+		void router.push("/login");
 	};
 
 	if (user) {
@@ -171,7 +186,7 @@ const LoginPage = ({ user }: InferGetServerSidePropsType<typeof getServerSidePro
 	);
 };
 
-export const getServerSideProps = async ({ req }: GetServerSidePropsContext) => {
+export const getServerSideProps = (async ({ req }: GetServerSidePropsContext) => {
 	const token = req?.cookies["access-token"];
 	if (token) {
 		const user = await getUser(token);
@@ -185,7 +200,7 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext) => 
 			props: { user: null },
 		};
 	}
-};
+}) satisfies GetServerSideProps<{ user: ILoggedUser | null }>;
 
 LoginPage.getLayout = function getLayout(page: ReactElement) {
 	return <Layout>{page}</Layout>;

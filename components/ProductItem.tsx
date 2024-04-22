@@ -1,16 +1,19 @@
 import Image from "next/image";
+import { useState } from "react";
+import { Counter } from "@/components/Counter";
 import { type ICartItem } from "@models/carts";
 import { type IProduct } from "@models/products";
 
 type ProductItemProps = {
 	product: IProduct;
-	addToCart: (product: Pick<ICartItem, "productId">) => void;
+	addToCart: (product: ICartItem) => void;
 };
 
 export const ProductItem = ({
 	product: { category, description, image, price, productId, stock, title },
 	addToCart,
 }: ProductItemProps) => {
+	const [quantity, setQuantity] = useState(stock > 0 ? 1 : 0);
 	return (
 		<div className="rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7] sm:flex">
 			<div className="relative w-full flex-shrink-0 overflow-hidden rounded-t-xl sm:max-w-[15rem] sm:rounded-s-xl md:max-w-md md:rounded-se-none">
@@ -35,10 +38,11 @@ export const ProductItem = ({
 					<button
 						type="button"
 						className="mb-2 mt-6 inline-flex w-fit items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-						onClick={() => addToCart({ productId })}
+						onClick={() => addToCart({ productId, quantity })}
 					>
 						Add to cart
 					</button>
+					<Counter maxAmount={stock} changeAmount={(newAmount) => setQuantity(newAmount)} />
 					<div className="mb-3">
 						<p className="text-xs text-gray-500 dark:text-gray-500">Available: {stock}</p>
 					</div>
